@@ -9,14 +9,14 @@ const AuthorIntro = () => (
           width={64}
           height={64}
           className="mr-3"
-          src="https://avatars1.githubusercontent.com/u/9482724?s=460&u=69a6acab13fd5547a4e316e496b573271077147f&v=4"
+          src="https://www.dropbox.com/s/7cwt1tz4v1r4ew4/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202020-07-26%2018.32.31.png?raw=1"
           alt="Generic placeholder"
         />
         <Media.Body>
           <h5 className="font-weight-bold mb-0">Hello Friends,</h5>
           <p className="welcome-text">
-            My name is Filip Jerga and I am an experienced software engineer and
-            freelance developer. and this is my blog page.
+            My name is Dongeun Paeng and I am running a startup. I'm also a
+            freelancing devleoper for multilple clients.
           </p>
         </Media.Body>
       </Media>

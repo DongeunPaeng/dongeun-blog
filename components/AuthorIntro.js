@@ -9,7 +9,7 @@ const AuthorIntro = () => (
           width={64}
           height={64}
           className="mr-3"
-          src="https://www.dropbox.com/s/7cwt1tz4v1r4ew4/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202020-07-26%2018.32.31.png?raw=1"
+          src="https://via.placeholder.com/150"
           alt="Generic placeholder"
         />
         <Media.Body>

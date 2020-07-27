@@ -1,6 +1,5 @@
 import { Card } from "react-bootstrap";
 import Link from "next/link";
-import { urlFor } from "lib/api";
 
 const CardListItem = ({ link, author, title, subtitle, image, date }) => (
   <Card className={`fj-card fj-card-list`}>

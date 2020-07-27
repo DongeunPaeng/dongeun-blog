@@ -1,66 +1,51 @@
 import { useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Button } from "react-bootstrap";
 import PageLayout from "components/PageLayout";
 import AuthorIntro from "components/AuthorIntro";
-import CardListItem from "components/CardListItem";
-import CardItem from "components/CardItem";
 import FilteringMenu from "components/FilteringMenu";
 
+import { useGetBlogsPages } from "actions/pagination";
 import { getAllBlogs } from "lib/api";
 
 export default function Home({ blogs }) {
   const [filter, setFilter] = useState({
     view: { list: 0 },
   });
+
+  const { pages, isLoadingMore, isReachingEnd, loadMore } = useGetBlogsPages({
+    blogs,
+    filter,
+  });
+
   return (
     <PageLayout>
       <AuthorIntro />
       <FilteringMenu
         filter={filter}
-        onChange={(option, value) => {
-          setFilter({ ...filter, [option]: value });
-        }}
+        onChange={(option, value) => setFilter({ ...filter, [option]: value })}
       />
       <hr />
-      <Row className="mb-5">
-        {blogs.map((blog) =>
-          filter.view.list ? (
-            <Col key={`${blog.slug}-list`} md="10">
-              <CardListItem
-                author={blog.author}
-                date={blog.date}
-                image={blog.coverImage}
-                title={blog.title}
-                subtitle={blog.subtitle}
-                link={{
-                  href: "/blogs/[slug]",
-                  as: `/blogs/${blog.slug}`,
-                }}
-              />
-            </Col>
-          ) : (
-            <Col key={blog.slug} md="4">
-              <CardItem
-                author={blog.author}
-                date={blog.date}
-                image={blog.coverImage}
-                title={blog.title}
-                subtitle={blog.subtitle}
-                link={{
-                  href: "/blogs/[slug]",
-                  as: `/blogs/${blog.slug}`,
-                }}
-              />
-            </Col>
-          )
-        )}
-      </Row>
+      <Row className="mb-5">{pages}</Row>
+      <div style={{ textAlign: "center" }}>
+        <Button
+          onClick={loadMore}
+          disabled={isReachingEnd || isLoadingMore}
+          size="lg"
+          variant="outline-secondary"
+        >
+          {isLoadingMore
+            ? "..."
+            : isReachingEnd
+            ? "No more blogs"
+            : "More Blogs"}
+        </Button>
+      </div>
     </PageLayout>
   );
 }
 
 export async function getStaticProps() {
-  const blogs = await getAllBlogs();
+  const blogs = await getAllBlogs({ offset: 0 });
   return {
     props: {
       blogs,

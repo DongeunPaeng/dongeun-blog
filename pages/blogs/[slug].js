@@ -4,6 +4,7 @@ import BlogContent from "components/BlogContent";
 import { getBlogBySlug, getAllBlogs } from "lib/api";
 import { Row, Col } from "react-bootstrap";
 import { urlFor } from "lib/api";
+import moment from "moment";
 
 const BlogDetail = ({ blog }) => {
   return (
@@ -13,12 +14,12 @@ const BlogDetail = ({ blog }) => {
           <BlogHeader
             title={blog.title}
             subtitle={blog.subtitle}
-            date={blog.date}
+            date={moment(blog.date).format("LLL")}
             author={blog.author}
             coverImage={urlFor(blog.coverImage).height(600)}
           />
           <hr />
-          <BlogContent content={blog.content} />
+          {blog.content && <BlogContent content={blog.content} />}
         </Col>
       </Row>
     </PageLayout>

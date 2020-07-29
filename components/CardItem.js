@@ -12,7 +12,7 @@ const CardItem = ({
   date,
 }) => (
   <Card className={`fj-card ${mode}`}>
-    <div className="card-body-wrapper">
+    <div className={`card-body-wrapper ${!image ? "no-image" : ""}`}>
       <Card.Header className="d-flex flex-row">
         <img
           src={author?.avatar || "https://via.placeholder.com/150"}
@@ -43,11 +43,13 @@ const CardItem = ({
         {mode === "placeholder" ? (
           <div className="image-placeholder" />
         ) : (
-          <Card.Img
-            height="180px"
-            src={urlFor(image).height(300).crop("center").fit("clip")}
-            alt="Card image cap"
-          />
+          image && (
+            <Card.Img
+              height="180px"
+              src={urlFor(image).height(300).crop("center").fit("clip")}
+              alt="Card image cap"
+            />
+          )
         )}
       </div>
       <Card.Body>
